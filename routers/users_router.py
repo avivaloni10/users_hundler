@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from config import SessionLocal
 from sqlalchemy.orm import Session
 from schemas import RequestUser, Response
-import crud
+from dal import user
 
 router = APIRouter()
 

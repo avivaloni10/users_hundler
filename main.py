@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-import router
+from routers import users_router
 from config import engine
 from models import user
 

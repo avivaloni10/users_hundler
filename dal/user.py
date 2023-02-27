@@ -1,8 +1,6 @@
-from typing import Type, Optional
-
 from sqlalchemy.orm import Session
 from models.user import User
-from schemas import UserSchema
+from schemas.user_schemas import UserSchema
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
