@@ -1,4 +1,5 @@
 .idea
 venv
-tests/integration_tests/.pytest_cache
 tests/.pytest_cache
+tests/integration_tests/.pytest_cache
+tests/integration_tests/user_endpoints/.pytest_cache
