@@ -5,6 +5,11 @@ from pydantic.generics import GenericModel
 T = TypeVar('T')
 
 
+class LoginSchema(BaseModel):
+    email: Optional[str] = None
+    password: Optional[str] = None
+
+
 class UserSchema(BaseModel):
     email: Optional[str] = None
     password: Optional[str] = None
@@ -20,6 +25,10 @@ class UserSchema(BaseModel):
 
 class Request(GenericModel, Generic[T]):
     parameter: Optional[T] = Field(...)
+
+
+class RequestLogin(BaseModel):
+    parameter: LoginSchema = Field(...)
 
 
 class RequestUser(BaseModel):

@@ -23,6 +23,11 @@ UPDATED_USER_EMAIL_PASSWORD_PHONE_NUMBER = {
     'phone_number': '0542223333'
 }
 
+LOGIN_REQUEST = {
+    'email': 'a@gmail.com',
+    'password': 'Aa111111',
+}
+
 
 def validate_user_creation(user_details: Dict, expected_status_code: int = 200, expected_result: Optional[Dict] = None):
     if expected_result is None:
