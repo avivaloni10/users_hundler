@@ -47,3 +47,10 @@ def test_create_user_no_car_model_no_car_color_no_plate_number() -> None:
     del user_details["plate_number"]
     validate_user_creation(user_details=user_details)
     validate_user_deletion(user_details=user_details)
+
+
+def test_create_user_user_already_exists() -> None:
+    validate_user_creation(user_details=USER_DETAILS)
+    with pytest.raises(IntegrityError):
+        validate_user_creation(user_details=USER_DETAILS)
+    validate_user_deletion(user_details=USER_DETAILS)

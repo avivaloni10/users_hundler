@@ -15,7 +15,7 @@ async def root():
 
 
 @app.get("/ping")
-async def say_hello():
+async def ping():
     return {"pong"}
 
 app.include_router(users_router.router, prefix="/users", tags=["users"])

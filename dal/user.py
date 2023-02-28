@@ -43,3 +43,4 @@ def update_user_by_email(db: Session, email: str, user: UserSchema):
 
     db.commit()
     db.refresh(old_user)
+    return old_user

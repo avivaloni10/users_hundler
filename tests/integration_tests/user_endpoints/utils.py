@@ -5,15 +5,23 @@ from main import app
 
 client = TestClient(app)
 
-USER_DETAILS = {'car_color': 'Black',
-                'car_model': 'Hatzil',
-                'email': 'a@gmail.com',
-                'full_name': 'Dov Sherman',
-                'password': 'Aa111111',
-                'phone_number': '0541112222',
-                'plate_number': '0000000'}
+USER_DETAILS = {
+    'car_color': 'Black',
+    'car_model': 'Hatzil',
+    'email': 'a@gmail.com',
+    'full_name': 'Dov Sherman',
+    'password': 'Aa111111',
+    'phone_number': '0541112222',
+    'plate_number': '0000000'
+}
 
-UPDATED_USER_DETAILS = {'plate_number': '1111111'}
+UPDATED_USER_PLATE_NUMBER = {'plate_number': '1111111'}
+
+UPDATED_USER_EMAIL_PASSWORD_PHONE_NUMBER = {
+    'email': 'b@gmail.com',
+    'password': 'Bb222222',
+    'phone_number': '0542223333'
+}
 
 
 def validate_user_creation(user_details: Dict, expected_status_code: int = 200, expected_result: Optional[Dict] = None):
