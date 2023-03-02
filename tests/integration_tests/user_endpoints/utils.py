@@ -1,9 +1,16 @@
 from typing import Dict, Optional
 
+from sqlalchemy.exc import IntegrityError
 from starlette.testclient import TestClient
 from main import app
 
 client = TestClient(app)
+
+CREATE_USER_IMPORT_PATH = "dal.user.create_user"
+GET_USER_BY_EMAIL_IMPORT_PATH = "dal.user.get_user_by_email"
+GET_USERS_IMPORT_PATH = "dal.user.get_users"
+UPDATE_USER_BY_EMAIL_IMPORT_PATH = "dal.user.update_user_by_email"
+DELETE_USER_BY_EMAIL_IMPORT_PATH = "dal.user.delete_user_by_email"
 
 USER_DETAILS = {
     'car_color': 'Black',
