@@ -3,7 +3,7 @@ from config.db import Base
 
 
 class User(Base):
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     email = Column(String, primary_key=True, nullable=False)
     password = Column(String, nullable=False)
