@@ -14,10 +14,11 @@ def get_db():
     finally:
         db.close()
 
-
 @router.post("/")
 async def create(request: RequestUser, db: Session = Depends(get_db)):
-    user_crud.create_user(db, request.parameter)
+    user = user_crud.create_user(db, request.parameter)
+    if not user:
+        raise HTTPException(status_code=409, detail="Registration failed")
     return Response(code=200, status="OK", message="User created successfully").dict(exclude_none=True)
 
 
