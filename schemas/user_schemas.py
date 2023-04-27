@@ -13,6 +13,7 @@ class LoginSchema(BaseModel):
 class UserSchema(BaseModel):
     email: Optional[str] = None
     password: Optional[str] = None
+    token: Optional[str] = None
     phone_number: Optional[str] = None
     full_name: Optional[str] = None
     car_model: Optional[str] = None

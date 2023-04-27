@@ -11,10 +11,15 @@ def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
 
-def create_user(db: Session, user: UserSchema):
+def get_user_by_token(db: Session, token: str):
+    return db.query(User).filter(User.token == token).first()
+
+
+def create_user(db: Session, user: UserSchema, token: str):
     new_user = User(
         email=user.email,
         password=user.password,
+        token=token,
         phone_number=user.phone_number,
         full_name=user.full_name,
         car_model=user.car_model,

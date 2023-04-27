@@ -6,6 +6,6 @@ client = TestClient(app)
 
 
 def test_create_user():
-    response = client.get("/")
+    response = client.get("/ping")
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+    assert response.json() == ["pong"]

@@ -8,6 +8,7 @@ client = TestClient(app)
 
 CREATE_USER_IMPORT_PATH = "dal.user.create_user"
 GET_USER_BY_EMAIL_IMPORT_PATH = "dal.user.get_user_by_email"
+GET_USER_BY_TOKEN_IMPORT_PATH = "dal.user.get_user_by_token"
 GET_USERS_IMPORT_PATH = "dal.user.get_users"
 UPDATE_USER_BY_EMAIL_IMPORT_PATH = "dal.user.update_user_by_email"
 DELETE_USER_BY_EMAIL_IMPORT_PATH = "dal.user.delete_user_by_email"
@@ -47,6 +48,8 @@ def validate_user_creation(user_details: Dict, expected_status_code: int = 200, 
 def validate_user_deletion(user_details: Dict, expected_status_code: int = 200, expected_result: Optional[Dict] = None):
     if expected_result is None:
         expected_result = {'code': 200, 'message': 'User deleted successfully', 'status': 'OK'}
-    response = client.delete(url=f"/users/{user_details['email']}")
+    response = client.delete(url=f"/users/{user_details['email']}", headers={
+        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+    })
     assert response.status_code == expected_status_code
     assert response.json() == expected_result
