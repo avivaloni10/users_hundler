@@ -39,15 +39,18 @@ async def create(
         request: RequestUser,
         db: Session = Depends(get_db),
 ):
-    user = user_crud.create_user(db, request.parameter, str(uuid.uuid5(
-        namespace=uuid.NAMESPACE_X500, name=f"{request.parameter.email}{request.parameter.password}")
-    ))
+    t = str(uuid.uuid5(namespace=uuid.NAMESPACE_X500, name=f"{request.parameter.email}{request.parameter.password}"))
+    try:
+        user = user_crud.create_user(db=db, user=request.parameter, token=t)
+    except IntegrityError as ie:
+        raise HTTPException(status_code=400, detail=ie.orig.args[0])
     if not user:
         raise HTTPException(status_code=409, detail="Registration failed")
     return Response(
         code=200,
         status="OK",
         message="User created successfully",
+        result={"token": t}
     ).dict(exclude_none=True)
 
 
