@@ -38,11 +38,14 @@ LOGIN_REQUEST = {
 
 
 def validate_user_creation(user_details: Dict, expected_status_code: int = 200, expected_result: Optional[Dict] = None):
-    if expected_result is None:
-        expected_result = {'code': 200, 'message': 'User created successfully', 'status': 'OK'}
     response = client.post(url="/users", json={"parameter": user_details})
     assert response.status_code == expected_status_code
-    assert response.json() == expected_result
+    resp_json = response.json()
+    if expected_result is None:
+        expected_result = {'code': 200, 'message': 'User created successfully', 'status': 'OK'}
+        if "result" in resp_json:
+            del resp_json["result"]
+    assert resp_json == expected_result
 
 
 def validate_user_deletion(user_details: Dict, expected_status_code: int = 200, expected_result: Optional[Dict] = None):

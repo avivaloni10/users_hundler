@@ -11,11 +11,10 @@ class LoginSchema(BaseModel):
 
 
 class UserSchema(BaseModel):
-    email: Optional[str] = None
-    password: Optional[str] = None
-    token: Optional[str] = None
-    phone_number: Optional[str] = None
-    full_name: Optional[str] = None
+    email: str
+    password: str
+    phone_number: str
+    full_name: str
     car_model: Optional[str] = None
     car_color: Optional[str] = None
     plate_number: Optional[str] = None
@@ -41,3 +40,7 @@ class Response(GenericModel, Generic[T]):
     status: str
     message: str
     result: Optional[T]
+
+
+class Token(BaseModel):
+    email: str
