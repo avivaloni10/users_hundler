@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from unittest.mock import patch
 
 import pytest
@@ -21,8 +22,8 @@ def test_create_user_no_email(create_user_mock) -> None:
 
     user_details = deepcopy(USER_DETAILS)
     del user_details["email"]
-    with pytest.raises(IntegrityError):
-        validate_user_creation(user_details=user_details)
+    response = client.post(url="/users", json={"parameter": user_details})
+    assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 @patch(CREATE_USER_IMPORT_PATH)
@@ -31,8 +32,8 @@ def test_create_user_no_password(create_user_mock) -> None:
 
     user_details = deepcopy(USER_DETAILS)
     del user_details["password"]
-    with pytest.raises(IntegrityError):
-        validate_user_creation(user_details=user_details)
+    response = client.post(url="/users", json={"parameter": user_details})
+    assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 @patch(CREATE_USER_IMPORT_PATH)
@@ -41,8 +42,8 @@ def test_create_user_no_phone_number(create_user_mock) -> None:
 
     user_details = deepcopy(USER_DETAILS)
     del user_details["phone_number"]
-    with pytest.raises(IntegrityError):
-        validate_user_creation(user_details=user_details)
+    response = client.post(url="/users", json={"parameter": user_details})
+    assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 @patch(CREATE_USER_IMPORT_PATH)
@@ -51,8 +52,8 @@ def test_create_user_no_full_name(create_user_mock) -> None:
 
     user_details = deepcopy(USER_DETAILS)
     del user_details["full_name"]
-    with pytest.raises(IntegrityError):
-        validate_user_creation(user_details=user_details)
+    response = client.post(url="/users", json={"parameter": user_details})
+    assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 @patch(CREATE_USER_IMPORT_PATH)
@@ -72,5 +73,5 @@ def test_create_user_user_already_exists(create_user_mock) -> None:
     create_user_mock.side_effect = [User(**USER_DETAILS), IntegrityError(None, None, None)]
 
     validate_user_creation(user_details=USER_DETAILS)
-    with pytest.raises(IntegrityError):
-        validate_user_creation(user_details=USER_DETAILS)
+    response = client.post(url="/users", json={"parameter": USER_DETAILS})
+    assert response.status_code == HTTPStatus.BAD_REQUEST

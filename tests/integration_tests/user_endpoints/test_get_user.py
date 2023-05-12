@@ -9,7 +9,7 @@ def test_get_user(get_user_by_email_mock) -> None:
     get_user_by_email_mock.return_value = User(**USER_DETAILS)
 
     response = client.get(url=f"/users/{USER_DETAILS['email']}", headers={
-        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+        'Authorization': f'Bearer {token(USER_DETAILS["email"])}'
     })
     assert response.status_code == 200
     assert response.json() == {
@@ -25,7 +25,7 @@ def test_get_user_email_not_exists(get_user_by_email_mock) -> None:
     get_user_by_email_mock.return_value = None
 
     response = client.get(url="/users/metoonaf@gmail.com", headers={
-        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+        'Authorization': f'Bearer {token("metoonaf@gmail.com")}'
     })
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}

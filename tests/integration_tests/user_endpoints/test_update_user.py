@@ -13,7 +13,7 @@ def test_update_user(get_user_by_email_mock, update_user_by_email_mock) -> None:
     response = client.put(url=f"/users/{USER_DETAILS['email']}", json={
         "parameter": UPDATED_USER_PLATE_NUMBER
     }, headers={
-        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+        'Authorization': f'Bearer {token(USER_DETAILS["email"])}'
     })
     assert response.status_code == 200
     assert response.json() == {
@@ -31,7 +31,7 @@ def test_update_user_user_not_exists(get_user_by_email_mock) -> None:
     response = client.put(url=f"/users/{USER_DETAILS['email']}", json={
         "parameter": UPDATED_USER_PLATE_NUMBER
     }, headers={
-        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+        'Authorization': f'Bearer {token(USER_DETAILS["email"])}'
     })
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
@@ -46,7 +46,7 @@ def test_update_user_not_update_email_password_phone_number(get_user_by_email_mo
     response = client.put(url=f"/users/{USER_DETAILS['email']}", json={
         "parameter": UPDATED_USER_EMAIL_PASSWORD_PHONE_NUMBER
     }, headers={
-        'Authorization': f'Bearer f7948d51-613c-5301-9d98-a741bbb7f8ed'
+        'Authorization': f'Bearer {token(USER_DETAILS["email"])}'
     })
     assert response.status_code == 200
     assert response.json() == {
