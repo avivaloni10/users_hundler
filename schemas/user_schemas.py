@@ -23,6 +23,16 @@ class UserSchema(BaseModel):
         orm_mode = True
 
 
+class UserUpdateSchema(BaseModel):
+    full_name: Optional[str] = None
+    car_model: Optional[str] = None
+    car_color: Optional[str] = None
+    plate_number: Optional[str] = None
+
+    class Config:
+        orm_mode = True
+
+
 class Request(GenericModel, Generic[T]):
     parameter: Optional[T] = Field(...)
 
@@ -33,6 +43,10 @@ class RequestLogin(BaseModel):
 
 class RequestUser(BaseModel):
     parameter: UserSchema = Field(...)
+
+
+class RequestUserUpdate(BaseModel):
+    parameter: UserUpdateSchema = Field(...)
 
 
 class Response(GenericModel, Generic[T]):

@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 from models.user import User
-from schemas.user_schemas import UserSchema
+from schemas.user_schemas import UserSchema, UserUpdateSchema
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
@@ -40,7 +40,7 @@ def delete_user_by_email(db: Session, email: str):
     db.commit()
 
 
-def update_user_by_email(db: Session, email: str, user: UserSchema):
+def update_user_by_email(db: Session, email: str, user: UserUpdateSchema):
     old_user = get_user_by_email(db=db, email=email)
 
     old_user.full_name = user.full_name if user.full_name else old_user.full_name

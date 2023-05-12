@@ -13,7 +13,7 @@ from config.auth import SECRET_KEY_LOCATION
 from config.db import SessionLocal
 from dal import user as user_crud
 from models.user import User
-from schemas.user_schemas import RequestUser, Response, Token
+from schemas.user_schemas import RequestUser, Response, Token, RequestUserUpdate
 
 router = APIRouter()
 
@@ -114,7 +114,7 @@ async def get_by_email(
 @router.put("/{email}")
 async def update_by_email(
         email: str,
-        request: RequestUser,
+        request: RequestUserUpdate,
         db: Session = Depends(get_db),
         _=Depends(validated_token)
 ):
@@ -141,6 +141,7 @@ async def delete_by_email(
 
 
 @router.post("/login")
+@router.post("/token")
 async def login(
     db: Session = Depends(get_db),
     form_data: OAuth2PasswordRequestForm = Depends(),
