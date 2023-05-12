@@ -1,5 +1,3 @@
-import json
-import uuid
 from datetime import timedelta, datetime
 from functools import lru_cache
 
@@ -12,7 +10,6 @@ from sqlalchemy.orm import Session
 from config.auth import SECRET_KEY_LOCATION
 from config.db import SessionLocal
 from dal import user as user_crud
-from models.user import User
 from schemas.user_schemas import RequestUser, Response, Token, RequestUserUpdate
 
 router = APIRouter()
