@@ -39,12 +39,12 @@ def test_update_user_user_not_exists(get_user_by_email_mock) -> None:
 
 @patch(UPDATE_USER_BY_EMAIL_IMPORT_PATH)
 @patch(GET_USER_BY_EMAIL_IMPORT_PATH)
-def test_update_user_not_update_email_password_phone_number(get_user_by_email_mock, update_user_by_email_mock) -> None:
+def test_update_user_not_update_email_phone_number(get_user_by_email_mock, update_user_by_email_mock) -> None:
     get_user_by_email_mock.return_value = User(**USER_DETAILS)
     update_user_by_email_mock.return_value = User(**USER_DETAILS)
 
     response = client.put(url=f"/users/{USER_DETAILS['email']}", json={
-        "parameter": UPDATED_USER_EMAIL_PASSWORD_PHONE_NUMBER
+        "parameter": UPDATED_USER_EMAIL_PHONE_NUMBER
     }, headers={
         'Authorization': f'Bearer {token(USER_DETAILS["email"])}'
     })

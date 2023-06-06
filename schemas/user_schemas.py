@@ -24,6 +24,7 @@ class UserSchema(BaseModel):
 
 
 class UserUpdateSchema(BaseModel):
+    password: Optional[str] = None
     full_name: Optional[str] = None
     car_model: Optional[str] = None
     car_color: Optional[str] = None

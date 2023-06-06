@@ -39,9 +39,8 @@ USER_DETAILS_ENCRYPTED_PASS = {
 
 UPDATED_USER_PLATE_NUMBER = {'plate_number': '1111111'}
 
-UPDATED_USER_EMAIL_PASSWORD_PHONE_NUMBER = {
+UPDATED_USER_EMAIL_PHONE_NUMBER = {
     'email': 'b@gmail.com',
-    'password': 'Bb222222',
     'phone_number': '0542223333'
 }
 

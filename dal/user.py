@@ -43,6 +43,7 @@ def delete_user_by_email(db: Session, email: str):
 def update_user_by_email(db: Session, email: str, user: UserUpdateSchema):
     old_user = get_user_by_email(db=db, email=email)
 
+    old_user.password = user.password if user.password else old_user.password
     old_user.full_name = user.full_name if user.full_name else old_user.full_name
     old_user.car_model = user.car_model if user.car_model else old_user.car_model
     old_user.car_color = user.car_color if user.car_color else old_user.car_color
